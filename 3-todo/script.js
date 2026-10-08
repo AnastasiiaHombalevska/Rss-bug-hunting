@@ -22,6 +22,7 @@ function addTask() {
 
   tasks.push({ id: nextId++, text: text, done: false });
   input.value = "";
+  
   render();
 }
 
@@ -51,10 +52,13 @@ function updateCounter() {
 
 function render() {
   const visible = getVisibleTasks();
-  for (let i = 1; i <= visible.length; i++) {
+  console.log(visible.length)
+
+  for (let i = 0; i < visible.length; i++) {
     const task = visible[i];
     const li = document.createElement("li");
     li.className = "task";
+    
     if (task.done) {
       li.classList.add("completed");
     }
@@ -73,6 +77,7 @@ function render() {
     li.appendChild(del);
     list.appendChild(li);
   }
+  
   updateCounter();
 }
 
@@ -84,6 +89,7 @@ filterButtons.forEach((btn) => {
     filterButtons.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     currentFilter = btn.dataset.filter;
+
     render();
   });
 });
