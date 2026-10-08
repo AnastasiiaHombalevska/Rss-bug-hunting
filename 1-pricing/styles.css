@@ -48,6 +48,7 @@ body {
   padding: 0;
   width: 280px;
   text-align: center;
+  padding: 6px;
 }
 
 .plan--featured {
@@ -85,7 +86,7 @@ body {
 }
 
 .features li::before {
-  content: "";
+  content: "✓";
   color: #22c55e;
   font-weight: 700;
   margin-right: 8px;
@@ -95,7 +96,7 @@ body {
   display: inline-block;
   padding: 12px 28px;
   border-radius: 8px;
-  background: #cbd5e1;
+  background: #2563eb;
   color: #ffffff;
   text-decoration: none;
   font-weight: 600;
