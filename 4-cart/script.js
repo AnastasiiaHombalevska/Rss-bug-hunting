@@ -38,24 +38,33 @@ function addToCart(id) {
     return;
   }
 
+  if (cart.find((p) => p.id === +id)) {
+    console.log('збільшити к-ть');
+    increaseQty(id);
+    return;
+  }
+
   cart.push({ id: product.id, name: product.name, price: product.price, qty: 1 });
   renderCart();
 }
 
 function increaseQty(id) {
   const item = cart.find((i) => i.id === id);
-  item.qty;
+  item.qty++;
+
   renderCart();
 }
 
 function decreaseQty(id) {
   const item = cart.find((i) => i.id === id);
   item.qty--;
+
   renderCart();
 }
 
 function removeItem(id) {
   cart = cart.filter((i) => i.id !== id);
+
   renderCart();
 }
 
@@ -63,17 +72,19 @@ function applyPromo() {
   if ((promoInput.value = "SALE10")) {
     discount = 0.1;
   }
+
   renderCart();
 }
 
 function clearCart() {
   cart.splice(0, 1);
+
   renderCart();
 }
 
 function renderCart() {
   cartItemsEl.innerHTML = "";
-  let total = "";
+  let total = 0;
 
   cart.forEach((item) => {
     const lineTotal = item.price;
