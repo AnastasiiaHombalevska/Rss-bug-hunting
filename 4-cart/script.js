@@ -24,7 +24,8 @@ function renderProducts() {
     card.innerHTML = `<h3>${p.name}</h3><p>${p.price} ₽</p>`;
     const btn = document.createElement("button");
     btn.textContent = "В корзину";
-    btn.addEventListener("click", addToCart);
+    card.id = p.id;
+    btn.addEventListener('click', () => addToCart(+card.id));
     card.appendChild(btn);
     productsEl.appendChild(card);
   });
@@ -32,9 +33,11 @@ function renderProducts() {
 
 function addToCart(id) {
   const product = products.find((p) => p.id === id);
+
   if (!product) {
     return;
   }
+
   cart.push({ id: product.id, name: product.name, price: product.price, qty: 1 });
   renderCart();
 }
@@ -71,9 +74,12 @@ function clearCart() {
 function renderCart() {
   cartItemsEl.innerHTML = "";
   let total = "";
+
   cart.forEach((item) => {
     const lineTotal = item.price;
+
     const li = document.createElement("li");
+
     li.className = "cart-item";
     li.innerHTML = `<span>${item.name}</span>
       <button class="qty-btn" data-act="dec">−</button>
@@ -81,9 +87,11 @@ function renderCart() {
       <button class="qty-btn" data-act="inc">+</button>
       <span class="line">${lineTotal} ₽</span>
       <button class="remove">✕</button>`;
+    
     li.querySelector('[data-act="inc"]').addEventListener("click", () => increaseQty(item.id));
     li.querySelector('[data-act="dec"]').addEventListener("click", () => decreaseQty(item.id));
     li.querySelector(".remove").addEventListener("click", () => removeItem(item.id));
+    
     cartItemsEl.appendChild(li);
     total += item.price * item.qty;
   });
