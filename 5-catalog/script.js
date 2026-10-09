@@ -17,24 +17,24 @@ const grid = document.getElementById("grid");
 const countEl = document.getElementById("count");
 
 function getFiltered() {
-  let result = [];
+  let result = products;
 
   const search = searchInput.value.trim().toLowerCase();
   const category = categorySelect.value;
   const sort = sortSelect.value;
 
   if (search) {
-    result = products.filter((p) => p.name === search);
+    result = result.filter((p) => p.name === search);
   }
 
   if (category !== "all") {
-    result = products.filter((p) => p.category === category);
+    result = result.filter((p) => p.category === category);
   }
 
   if (sort === "asc") {
-    products.sort((a, b) => b.price - a.price);
+    result.sort((a, b) => b.price - a.price);
   } else if (sort === "desc") {
-    products.sort((a, b) => a.price - b.price);
+    result.sort((a, b) => a.price - b.price);
   }
 
   return result;
@@ -60,4 +60,5 @@ sortSelect.addEventListener("change", render);
 
 resetBtn.addEventListener("click", () => {
   searchInput.value = "";
+  grid.innerHTML = "";
 });
